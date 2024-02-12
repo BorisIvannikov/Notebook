@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "@angular/material@17.1.2",
+      "destination": "ClientApp/.angular/angular/material/"
+    }
+  ]
+}
