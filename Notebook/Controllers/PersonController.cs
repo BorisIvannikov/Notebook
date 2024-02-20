@@ -8,7 +8,7 @@ using Notebook.Service.Interfaces;
 
 namespace Notebook.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
     public class PersonController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace Notebook.Controllers
             this.personService = personService;
         }
 
-        [Route("GetPersons")]
+        [Route("api/persons")]
         [HttpGet]
         public async Task<IEnumerable<Person>> GetPersons()
         {
@@ -34,7 +34,7 @@ namespace Notebook.Controllers
             return response.Data.ToList();
         }
 
-        [Route("Create")]
+        [Route("api/persons")]
         [HttpPost]
         public async Task<bool> Create(PersonViewModel model)
         {
@@ -49,7 +49,7 @@ namespace Notebook.Controllers
             return result;
         }
 
-        [Route("Update")]
+        [Route("api/persons/{id}")]
         [HttpPut]
         public async Task<bool> Update(int id, PersonViewModel model)
         {
@@ -64,7 +64,7 @@ namespace Notebook.Controllers
             return result;
         }
 
-        [Route("Delete")]
+        [Route("api/persons/{id}")]
         [HttpDelete]
         public async Task<bool> Delete(int id)
         {

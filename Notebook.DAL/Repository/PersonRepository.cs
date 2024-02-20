@@ -36,18 +36,16 @@ namespace Notebook.DAL.Repository
 
         public async Task<IEnumerable<Person>> GetAll()
         {
-            var query = await Task.Run(() =>
-                        from person in db.Persons
+            var query = from person in db.Persons
                         join phoneNumber in db.PhoneNumbers
                             on person equals phoneNumber.Person into phoneNumbers
                         select new Person
                         {
-                            PersonId=person.PersonId,
+                            PersonId = person.PersonId,
                             FirstName = person.FirstName,
                             LastName = person.LastName,
                             PhoneNumbers = phoneNumbers.ToList()
-                        }
-                    );
+                        };
 
             return query.AsEnumerable();
         }
@@ -72,15 +70,8 @@ namespace Notebook.DAL.Repository
 
             if (person != null)
             {
-                foreach (PhoneNumber pn in person.PhoneNumbers)
-                {
-                    var phone = db.PhoneNumbers.FirstOrDefault(x => x.PhoneNumberValue == pn.PhoneNumberValue);
-                    if (phone != null)
-                    {
-                        db.PhoneNumbers.Remove(phone);
-                        db.SaveChanges();
-                    }
-                }
+                db.PhoneNumbers.RemoveRange(person.PhoneNumbers);
+                db.SaveChanges();
             }
             return person;
         }

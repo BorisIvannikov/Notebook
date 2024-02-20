@@ -73,7 +73,7 @@ export class HomeComponent implements OnInit {
   }
 
   fetchPersons(): void {
-    this.http.get<Person[]>('https://localhost:5001/api/Person/GetPersons').subscribe(result => {
+    this.http.get<Person[]>('https://localhost:5001/api/persons/').subscribe(result => {
       this.persons = result;
     }, error => console.error(error));
   }
@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
       this.isCreate = true;
       this.submitButtonText = 'Create';
 
-      this.http.put<any>(`https://localhost:5001/api/Person/Update?id=${this.bufPersonForUpdateID}` , this.person)
+      this.http.put<any>(`https://localhost:5001/api/persons/${this.bufPersonForUpdateID}` , this.person)
         .subscribe(
           (response) => {
             console.log('Персона успешно Обновлена:', response);
@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit {
   }
 
   createPerson(): void {
-    this.http.post<any>('https://localhost:5001/api/Person/Create', this.person)
+    this.http.post<any>('https://localhost:5001/api/persons/', this.person)
       .subscribe(
         (response) => {
           console.log('Персона успешно создана:', response);
@@ -129,7 +129,7 @@ export class HomeComponent implements OnInit {
   }
 
   deletePerson(person: Person): void {
-    this.http.delete(`https://localhost:5001/api/Person/Delete?id=${person.personId}`)
+    this.http.delete(`https://localhost:5001/api/persons/${person.personId}`)
       .subscribe(
         () => {
           console.log('Персона успешно удалена');

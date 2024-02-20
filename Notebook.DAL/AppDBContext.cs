@@ -22,7 +22,7 @@ namespace Notebook.DAL
         {
             modelBuilder.Entity<Person>()
                 .HasMany(x => x.PhoneNumbers)
-                .WithOne(x => x.Person);
+                .WithOne(x => x.Person).OnDelete(DeleteBehavior.Cascade);
                 
         }
 
